@@ -57,8 +57,14 @@ public class ThermalService extends Service {
     private BroadcastReceiver mIntentReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            mPreviousApp = "";
-            mThermalUtils.setDefaultThermalProfile();
+            final String action = intent.getAction();
+            if (Intent.ACTION_SCREEN_ON.equals(action)) {
+                mHandler.postDelayed(mActivityRunnable, 500);
+            } else {
+                mHandler.removeCallbacks(mActivityRunnable);
+                mPreviousApp = "";
+                mThermalUtils.setDefaultThermalProfile();
+            }
         }
     };
 

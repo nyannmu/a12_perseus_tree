@@ -153,8 +153,12 @@ public final class ThermalUtils {
         return state;
     }
 
-    protected static void setDefaultThermalProfile() {
-        FileUtils.writeLine(THERMAL_SCONFIG, THERMAL_STATE_DEFAULT);
+    protected void setDefaultThermalProfile() {
+        try {
+            FileUtils.stringToFile(THERMAL_SCONFIG, THERMAL_STATE_DEFAULT);
+        } catch (IOException e) {
+            Log.e(TAG, "Failed to write to " + THERMAL_SCONFIG, e);
+        }
     }
 
     protected void setThermalProfile(String packageName) {
