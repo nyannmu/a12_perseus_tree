@@ -58,7 +58,7 @@
         <transport>hwbinder</transport>
         <version>1.0</version>
         <interface>
-            <name>INqNfc</name>
+            <name>INxpEse</name>
             <instance>default</instance>
         </interface>
     </hal>
