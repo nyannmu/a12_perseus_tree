@@ -94,3 +94,7 @@ PRODUCT_PACKAGES += \
 # Slider settings
 PRODUCT_PACKAGES += \
     DeviceSettings
+
+# Soong namespaces
+PRODUCT_SOONG_NAMESPACES += \
+    vendor/nxp/opensource/pn5xx
