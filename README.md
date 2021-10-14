@@ -1,4 +1,11 @@
-# Perseus tree adapt for a12
+Copyright (C) 2019 The LineageOS Project
+
+Device configuration for Xiaomi MIX 3
+=========================================
+
+The Xiaomi MIX 3 (codenamed _"perseus"_) is a high-end smartphone from Xiaomi.
+
+It was announced in October 2018. Release date was November 2018.
 
 ## Device specifications
 
@@ -13,17 +20,3 @@ Storage | 128/256 GB
 Battery | Non-removable Li-Ion 3200 mAh battery
 Display | 1080 x 2340 pixels, 18:9 ratio, 6.39 inches, Super AMOLED (~403 ppi density)
 Camera  | Dual 12 MP, 4-axis OIS, dual PDAF, LED flash
-
-## Details
-
-why i did this?, i don't know but i want to.
-
-## Get started
-
-this mix between device tree and common tree (for perseus, some aren't complatible even it's common tree.)
-
-```
-git clone https://github.com/lolipuru/a12_perseus_tree -b (your choice)
-```
-
-*wip for now, until it booted*
