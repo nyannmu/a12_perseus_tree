@@ -6,11 +6,15 @@
 
 $(call inherit-product, device/xiaomi/perseus/device.mk)
 
-# Inherit some common Lineage stuff.
-$(call inherit-product, vendor/lineage/config/common_full_phone.mk)
+# Inherit some common xdroid-CAF stuff.
+$(call inherit-product, vendor/xdroid/config/common.mk)
+
+TARGET_BOOT_ANIMATION_RES := 1080
+XDROID_BOOT_DARK := true
+XDROID_UI_BLUR := true
 
 # Device identifier. This must come after all inclusions.
-PRODUCT_NAME := lineage_perseus
+PRODUCT_NAME := xdroid_perseus
 PRODUCT_DEVICE := perseus
 PRODUCT_BRAND := Xiaomi
 PRODUCT_MODEL := Mi MIX 3
