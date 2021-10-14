@@ -39,3 +39,8 @@ TARGET_USES_NQ_NFC := true
 
 # Inherit from the proprietary version
 -include vendor/xiaomi/perseus/BoardConfigVendor.mk
+
+SELINUX_IGNORE_NEVERALLOWS := true
+BUILD_BROKEN_DUP_RULES := true
+BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
+
