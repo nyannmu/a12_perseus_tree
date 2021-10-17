@@ -90,6 +90,10 @@ PRODUCT_COPY_FILES += \
 # Secure element
 PRODUCT_PACKAGES += \
     SecureElement
+    
+# Slider settings
+PRODUCT_PACKAGES += \
+    DeviceSettings
 
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += \
