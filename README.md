@@ -26,4 +26,6 @@ this mix between device tree and common tree (for perseus, some aren't complatib
 git clone https://github.com/lolipuru/a12_perseus_tree -b (your choice)
 ```
 
-*wip for now, until it booted*
+xd-tree => device/xiaomi/perseus
+
+xd-common => device/xiaomi/sdm845-common
