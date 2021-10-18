@@ -48,19 +48,17 @@ void property_override(char const prop[], char const value[])
         __system_property_add(prop, strlen(prop), value, strlen(value));
 }
 
-void property_override_triple(char const system_prop[], char const vendor_prop[], char const bootimg_prop[], char const value[])
+
+void property_override_triple(char const product_prop[], char const system_prop[], char const vendor_prop[],
+    char const value[])
 {
+    property_override(product_prop, value);
     property_override(system_prop, value);
     property_override(vendor_prop, value);
-    property_override(bootimg_prop, value);
 }
 
 void vendor_load_properties()
 {
-    // Safetynet Workaround
-    property_override("ro.boot.verifiedbootstate", "green");
-    property_override("ro.build.description", "dipper-user 8.1.0 OPM1.171019.011 V9.5.5.0.OEAMIFA release-keys");
-    property_override_triple("ro.build.fingerprint", "ro.vendor.build.fingerprint", "ro.bootimage.build.fingerprint", "Xiaomi/dipper/dipper:8.1.0/OPM1.171019.011/V9.5.5.0.OEAMIFA:user/release-keys");
-    property_override("ro.system.build.fingerprint", "Xiaomi/dipper/dipper:8.1.0/OPM1.171019.011/V9.5.5.0.OEAMIFA:user/release-keys");
-    property_override("ro.product.model", "MI 8");
+    property_override("ro.build.description", "redfin-user 12 SPB5.210812.002 7671067 release-keys");
+    property_override_triple("ro.build.fingerprint", "ro.system.build.fingerprint", "ro.vendor.build.fingerprint", "google/redfin/redfin:12/SPB5.210812.002/7671067:user/release-keys");
 }
