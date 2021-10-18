@@ -40,6 +40,10 @@ TARGET_USES_NQ_NFC := true
 # Inherit from the proprietary version
 -include vendor/xiaomi/perseus/BoardConfigVendor.mk
 
+# Vendor init
+TARGET_INIT_VENDOR_LIB := //$(DEVICE_PATH):libinit_perseus
+TARGET_RECOVERY_DEVICE_MODULES := libinit_perseus
+
 SELINUX_IGNORE_NEVERALLOWS := true
 BUILD_BROKEN_DUP_RULES := true
 BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
