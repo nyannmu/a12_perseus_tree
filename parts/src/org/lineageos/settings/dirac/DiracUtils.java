@@ -100,9 +100,6 @@ public final class DiracUtils {
     protected void setEnabled(boolean enable) {
         mDiracSound.setEnabled(enable);
         mDiracSound.setMusic(enable ? 1 : 0);
-        if (enable) {
-            refreshPlaybackIfNecessary();
-        }
     }
 
     protected boolean isDiracEnabled() {
