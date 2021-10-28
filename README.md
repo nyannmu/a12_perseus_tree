@@ -29,3 +29,5 @@ git clone https://github.com/lolipuru/a12_perseus_tree -b (your choice)
 xd-tree => device/xiaomi/perseus
 
 xd-common => device/xiaomi/sdm845-common
+
+DO NOT MERGE/CLONE common-staging, no matter what
