@@ -111,8 +111,3 @@ PRODUCT_COPY_FILES += $(call find-copy-subdir-files,*,$(LOCAL_PATH)/devicesettin
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += \
     vendor/nxp/opensource/pn5xx
-
-# Misc
-PRODUCT_PACKAGES += \
-    charger_res_images \
-    ThemePicker
