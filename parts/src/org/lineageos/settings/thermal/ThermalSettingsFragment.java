@@ -39,7 +39,10 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.preference.PreferenceFragment;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.android.settingslib.applications.ApplicationsState;
 
@@ -52,8 +55,7 @@ import java.util.List;
 import java.util.Map;
 
 public class ThermalSettingsFragment extends PreferenceFragment
-        implements AdapterView.OnItemClickListener, ApplicationsState.Callbacks,
-        CompoundButton.OnCheckedChangeListener {
+        implements ApplicationsState.Callbacks {
 
     private AllPackagesAdapter mAllPackagesAdapter;
     private ApplicationsState mApplicationsState;
@@ -62,7 +64,7 @@ public class ThermalSettingsFragment extends PreferenceFragment
     private Map<String, ApplicationsState.AppEntry> mEntryMap =
             new HashMap<String, ApplicationsState.AppEntry>();
 
-    private ListView mUserListView;
+    private RecyclerView mAppsRecyclerView;
 
     private ThermalUtils mThermalUtils;
 
@@ -97,36 +99,12 @@ public class ThermalSettingsFragment extends PreferenceFragment
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-    }
-
-    @Override
     public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        boolean serviceEnabled = mThermalUtils.isServiceEnabled(getActivity());
-
-        mUserListView = view.findViewById(R.id.thermal_list_view);
-
-        if (serviceEnabled) {
-            mUserListView.setAdapter(mAllPackagesAdapter);
-            mUserListView.setOnItemClickListener(this);
-        }
-
-        mTextView = view.findViewById(R.id.switch_text);
-        mTextView.setText(getString(serviceEnabled ?
-                R.string.switch_bar_on : R.string.switch_bar_off));
-
-        mSwitchBar = view.findViewById(R.id.switch_bar);
-        Switch switchWidget = mSwitchBar.findViewById(android.R.id.switch_widget);
-        switchWidget.setChecked(serviceEnabled);
-        switchWidget.setOnCheckedChangeListener(this);
-        mSwitchBar.setActivated(serviceEnabled);
-        mSwitchBar.setOnClickListener(v -> {
-            switchWidget.setChecked(!switchWidget.isChecked());
-            mSwitchBar.setActivated(switchWidget.isChecked());
-        });
+        mAppsRecyclerView = view.findViewById(R.id.thermal_rv_view);
+        mAppsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mAppsRecyclerView.setAdapter(mAllPackagesAdapter);
     }
 
 
@@ -143,12 +121,6 @@ public class ThermalSettingsFragment extends PreferenceFragment
 
         mSession.onPause();
         mSession.onDestroy();
-    }
-
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        ViewHolder holder = (ViewHolder) view.getTag();
-        holder.mode.performClick();
     }
 
     @Override
@@ -251,7 +223,7 @@ public class ThermalSettingsFragment extends PreferenceFragment
         }
     }
 
-    private static class ViewHolder {
+    private class ViewHolder extends RecyclerView.ViewHolder {
         private TextView title;
         private Spinner mode;
         private ImageView icon;
@@ -259,6 +231,7 @@ public class ThermalSettingsFragment extends PreferenceFragment
         private ImageView stateIcon;
 
         private ViewHolder(View view) {
+            super(view);
             this.title = view.findViewById(R.id.app_name);
             this.mode = view.findViewById(R.id.app_mode);
             this.icon = view.findViewById(R.id.app_icon);
@@ -269,11 +242,9 @@ public class ThermalSettingsFragment extends PreferenceFragment
         }
     }
 
-    private static class ModeAdapter extends BaseAdapter {
+    private class ModeAdapter extends BaseAdapter {
 
         private final LayoutInflater inflater;
-        private final TypedValue textColorSecondary;
-        private final int textColor;
         private final int[] items = {
                 R.string.thermal_default,
                 R.string.thermal_benchmark,
@@ -286,11 +257,6 @@ public class ThermalSettingsFragment extends PreferenceFragment
 
         private ModeAdapter(Context context) {
             inflater = LayoutInflater.from(context);
-
-            textColorSecondary = new TypedValue();
-            context.getTheme().resolveAttribute(com.android.internal.R.attr.textColorSecondary,
-                    textColorSecondary, true);
-            textColor = context.getColor(textColorSecondary.resourceId);
         }
 
         @Override
@@ -319,40 +285,26 @@ public class ThermalSettingsFragment extends PreferenceFragment
             }
 
             view.setText(items[position]);
-            view.setTextColor(textColor);
             view.setTextSize(14f);
 
             return view;
         }
     }
 
-    private class AllPackagesAdapter extends BaseAdapter
+    private class AllPackagesAdapter extends RecyclerView.Adapter<ViewHolder>
             implements AdapterView.OnItemSelectedListener, SectionIndexer {
 
-        private final LayoutInflater mInflater;
-        private final ModeAdapter mModesAdapter;
         private List<ApplicationsState.AppEntry> mEntries = new ArrayList<>();
         private String[] mSections;
         private int[] mPositions;
 
         public AllPackagesAdapter(Context context) {
-            mInflater = LayoutInflater.from(context);
-            mModesAdapter = new ModeAdapter(context);
+            mActivityFilter = new ActivityFilter(context.getPackageManager());
         }
 
         @Override
-        public int getCount() {
+        public int getItemCount() {
             return mEntries.size();
-        }
-
-        @Override
-        public Object getItem(int position) {
-            return mEntries.get(position);
-        }
-
-        @Override
-        public boolean hasStableIds() {
-            return true;
         }
 
         @Override
@@ -360,33 +312,32 @@ public class ThermalSettingsFragment extends PreferenceFragment
             return mEntries.get(position).id;
         }
 
+        @NonNull
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            ViewHolder holder;
-            if (convertView == null) {
-                holder = new ViewHolder(mInflater.inflate(
-                        R.layout.thermal_list_item, parent, false));
-                holder.mode.setAdapter(mModesAdapter);
-                holder.mode.setOnItemSelectedListener(this);
-            } else {
-                holder = (ViewHolder) convertView.getTag();
-            }
+        public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            return new ViewHolder(LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.thermal_list_item, parent, false));
+        }
 
+        @Override
+        public void onBindViewHolder(ViewHolder holder, int position) {
+            Context context = holder.itemView.getContext();
             ApplicationsState.AppEntry entry = mEntries.get(position);
 
             if (entry == null) {
-                return holder.rootView;
+                return;
             }
 
+            holder.mode.setAdapter(new ModeAdapter(context));
+            holder.mode.setOnItemSelectedListener(this);
             holder.title.setText(entry.label);
+            holder.title.setOnClickListener(v -> holder.mode.performClick());
             mApplicationsState.ensureIcon(entry);
             holder.icon.setImageDrawable(entry.icon);
-            holder.mode.setSelection(mThermalUtils.getStateForPackage(entry.info.packageName),
-                    false);
+            int packageState = mThermalUtils.getStateForPackage(entry.info.packageName);
+            holder.mode.setSelection(packageState, false);
             holder.mode.setTag(entry);
-            holder.stateIcon.setImageResource(getStateDrawable(
-                    mThermalUtils.getStateForPackage(entry.info.packageName)));
-            return holder.rootView;
+            holder.stateIcon.setImageResource(getStateDrawable(packageState));
         }
 
         private void setEntries(List<ApplicationsState.AppEntry> entries,
@@ -404,32 +355,11 @@ public class ThermalSettingsFragment extends PreferenceFragment
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             final ApplicationsState.AppEntry entry = (ApplicationsState.AppEntry) parent.getTag();
-            switch (position) {
-                case ThermalUtils.STATE_DEFAULT:
-                    mThermalUtils.writePackage(entry.info.packageName, ThermalUtils.STATE_DEFAULT);
-                    break;
-                case ThermalUtils.STATE_BENCHMARK:
-                    mThermalUtils.writePackage(entry.info.packageName,
-                            ThermalUtils.STATE_BENCHMARK);
-                    break;
-                case ThermalUtils.STATE_BROWSER:
-                    mThermalUtils.writePackage(entry.info.packageName, ThermalUtils.STATE_BROWSER);
-                    break;
-                case ThermalUtils.STATE_CAMERA:
-                    mThermalUtils.writePackage(entry.info.packageName, ThermalUtils.STATE_CAMERA);
-                    break;
-                case ThermalUtils.STATE_DIALER:
-                    mThermalUtils.writePackage(entry.info.packageName, ThermalUtils.STATE_DIALER);
-                    break;
-                case ThermalUtils.STATE_GAMING:
-                    mThermalUtils.writePackage(entry.info.packageName, ThermalUtils.STATE_GAMING);
-                    break;
-                case ThermalUtils.STATE_STREAMING:
-                    mThermalUtils.writePackage(entry.info.packageName,
-                            ThermalUtils.STATE_STREAMING);
-                    break;
+            int currentState = mThermalUtils.getStateForPackage(entry.info.packageName);
+            if (currentState != position) {
+                mThermalUtils.writePackage(entry.info.packageName, position);
+                notifyDataSetChanged();
             }
-            notifyDataSetChanged();
         }
 
         @Override
@@ -447,7 +377,7 @@ public class ThermalSettingsFragment extends PreferenceFragment
 
         @Override
         public int getSectionForPosition(int position) {
-            if (position < 0 || position >= getCount()) {
+            if (position < 0 || position >= getItemCount()) {
                 return -1;
             }
 
