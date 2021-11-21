@@ -17,7 +17,6 @@ $(call inherit-product, frameworks/native/build/phone-xhdpi-6144-dalvik-heap.mk)
 # Overlays
 DEVICE_PACKAGE_OVERLAYS += \
     $(LOCAL_PATH)/overlay \
-    $(LOCAL_PATH)/overlay-lineage
 
 PRODUCT_ENFORCE_RRO_TARGETS := *
 
@@ -303,10 +302,6 @@ PRODUCT_BOOT_JARS += \
 # Tethering
 PRODUCT_PACKAGES += \
     TetheringConfigOverlay
-
-# Trust HAL
-PRODUCT_PACKAGES += \
-    vendor.lineage.trust@1.0-service
 
 # USB
 PRODUCT_PACKAGES += \
