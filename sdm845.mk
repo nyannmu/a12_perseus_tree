@@ -172,6 +172,8 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hidl.base@1.0 \
     android.hidl.base@1.0.vendor \
+    android.hidl.manager@1.0 \
+    android.hidl.manager@1.0_system \
     libhidltransport \
     libhidltransport.vendor \
     libhwbinder \
@@ -303,6 +305,14 @@ PRODUCT_BOOT_JARS += \
 PRODUCT_PACKAGES += \
     TetheringConfigOverlay
 
+# Keymaster
+PRODUCT_PACKAGES += \
+    android.hardware.keymaster@3.0 \
+    android.hardware.keymaster@3.0.vendor \
+    android.hardware.keymaster@4.0 \
+    android.hardware.keymaster@4.0.vendor \
+    android.hardware.keymaster@4.1.vendor 
+
 # USB
 PRODUCT_PACKAGES += \
     android.hardware.usb@1.0-service
@@ -425,9 +435,6 @@ PRODUCT_PACKAGES += \
     android.hardware.input.classifier@1.0.vendor \
     android.hardware.input.common@1.0.vendor \
     android.hardware.ir@1.0.vendor \
-    android.hardware.keymaster@3.0.vendor \
-    android.hardware.keymaster@4.0.vendor \
-    android.hardware.keymaster@4.1.vendor \
     android.hardware.light@2.0.vendor \
     android.hardware.media.bufferpool@1.0.vendor \
     android.hardware.media.c2@1.0.vendor \
