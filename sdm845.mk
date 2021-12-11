@@ -209,11 +209,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/permissions/privapp-permissions-hotword.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/privapp-permissions-hotword.xml
 
 # IFAA manager
-#PRODUCT_PACKAGES += \
-    #org.ifaa.android.manager
-
-#PRODUCT_BOOT_JARS += \
-    #org.ifaa.android.manager
+include vendor/xiaomi/perseus-extra/ifaa.mk
 
 # Input
 PRODUCT_COPY_FILES += \
@@ -402,3 +398,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/wifi/p2p_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/p2p_supplicant_overlay.conf \
     $(LOCAL_PATH)/wifi/wpa_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_supplicant_overlay.conf \
     $(LOCAL_PATH)/wifi/WCNSS_qcom_cfg.ini:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/WCNSS_qcom_cfg.ini
+
+# WFD
+include vendor/xiaomi/perseus-extra/wfd.mk
