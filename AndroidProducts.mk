@@ -5,9 +5,9 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/xdroid_perseus.mk
+    $(LOCAL_DIR)/fuse_perseus.mk
 
 COMMON_LUNCH_CHOICES := \
-    xdroid_perseus-user \
-    xdroid_perseus-userdebug \
-    xdroid_perseus-eng
+    fuse_perseus-user \
+    fuse_perseus-userdebug \
+    fuse_perseus-eng
