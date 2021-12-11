@@ -16,7 +16,7 @@ Camera  | Dual 12 MP, 4-axis OIS, dual PDAF, LED flash
 
 ## Details
 
-why i did this?, i don't know but i want to.
+at least working a12 device tree. lmao
 
 ## Get started
 
@@ -26,8 +26,6 @@ this mix between device tree and common tree (for perseus, some aren't complatib
 git clone https://github.com/lolipuru/a12_perseus_tree -b (your choice)
 ```
 
-xd-tree => device/xiaomi/perseus
+fuse-tree => device/xiaomi/perseus
 
-xd-common => device/xiaomi/sdm845-common
-
-DO NOT MERGE/CLONE common-staging, no matter what
+fuse-common => device/xiaomi/sdm845-common
