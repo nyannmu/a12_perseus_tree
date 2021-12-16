@@ -86,7 +86,7 @@ PRODUCT_COPY_FILES += \
 
 # NFC
 PRODUCT_PACKAGES += \
-    android.hardware.nfc@1.2-service \
+    android.hardware.nfc@1.1-service \
     NfcNci \
     Tag \
     android.hardware.secure_element@1.1 \
