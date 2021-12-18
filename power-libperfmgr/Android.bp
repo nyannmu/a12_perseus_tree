@@ -40,7 +40,7 @@ cc_binary {
     vintf_fragments: ["aidl/android.hardware.power-service.xiaomi-sdm845.xml"],
     vendor: true,
     shared_libs: [
-        "android.hardware.power-V1-ndk_platform",
+        "android.hardware.power-V2-ndk_platform",
         "libbase",
         "libcutils",
         "liblog",
@@ -48,6 +48,7 @@ cc_binary {
         "libbinder_ndk",
         "libdisppower-xiaomi-sdm845",
         "libperfmgr",
+        "libprocessgroup",
         "pixel-power-ext-V1-ndk_platform",
     ],
     srcs: [
