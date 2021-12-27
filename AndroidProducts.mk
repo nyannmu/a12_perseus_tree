@@ -5,9 +5,9 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/fuse_perseus.mk
+    $(LOCAL_DIR)/aosp_perseus.mk
 
 COMMON_LUNCH_CHOICES := \
-    fuse_perseus-user \
-    fuse_perseus-userdebug \
-    fuse_perseus-eng
+    aosp_perseus-user \
+    aosp_perseus-userdebug \
+    aosp_perseus-eng

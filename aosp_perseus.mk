@@ -7,12 +7,16 @@
 $(call inherit-product, device/xiaomi/perseus/device.mk)
 
 # Inherit some common fusion stuff.
-$(call inherit-product, vendor/fuse/config/common.mk)
+$(call inherit-product, vendor/aosp/config/common_full_phone.mk)
 
+TARGET_GAPPS_ARCH := arm64
 TARGET_BOOT_ANIMATION_RES := 1080
+TARGET_INCLUDE_STOCK_ARCORE := true
+TARGET_SUPPORTS_GOOGLE_RECORDER := true
+TARGET_SUPPORTS_NEXT_GEN_ASSISTANT := true
 
 # Device identifier. This must come after all inclusions.
-PRODUCT_NAME := fuse_perseus
+PRODUCT_NAME := aosp_perseus
 PRODUCT_DEVICE := perseus
 PRODUCT_BRAND := Xiaomi
 PRODUCT_MODEL := Mi MIX 3
