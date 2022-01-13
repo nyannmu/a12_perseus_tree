@@ -5,9 +5,9 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/nad_perseus.mk
+    $(LOCAL_DIR)/aosp_perseus.mk
 
 COMMON_LUNCH_CHOICES := \
-    nad_perseus-user \
-    nad_perseus-userdebug \
-    nad_perseus-eng
+    aosp_perseus-user \
+    aosp_perseus-userdebug \
+    aosp_perseus-eng
