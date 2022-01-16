@@ -5,9 +5,9 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/radiant_perseus.mk
+    $(LOCAL_DIR)/aosp_perseus.mk
 
 COMMON_LUNCH_CHOICES := \
-    radiant_perseus-user \
-    radiant_perseus-userdebug \
-    radiant_perseus-eng
+    aosp_perseus-user \
+    aosp_perseus-userdebug \
+    aosp_perseus-eng
