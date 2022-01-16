@@ -6,8 +6,8 @@
 
 $(call inherit-product, device/xiaomi/perseus/device.mk)
 
-# Inherit some common fusion stuff.
-$(call inherit-product, vendor/aosp/config/common_full_phone.mk)
+# Inherit some common Arcana stuff.
+$(call inherit-product, vendor/aosp/common.mk)
 
 TARGET_GAPPS_ARCH := arm64
 TARGET_BOOT_ANIMATION_RES := 1080
