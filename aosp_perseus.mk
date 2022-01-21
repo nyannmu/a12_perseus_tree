@@ -6,8 +6,8 @@
 
 $(call inherit-product, device/xiaomi/perseus/device.mk)
 
-# Inherit some common fusion stuff.
-$(call inherit-product, vendor/aosp/config/common.mk)
+# Inherit some common Arcana stuff.
+$(call inherit-product, vendor/aosp/common.mk)
 
 TARGET_BOOT_ANIMATION_RES := 1080
 
