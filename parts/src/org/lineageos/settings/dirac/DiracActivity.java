@@ -17,11 +17,9 @@
 package org.lineageos.settings.dirac;
 
 import android.os.Bundle;
+import android.preference.PreferenceActivity;
 
-import com.android.settingslib.collapsingtoolbar.CollapsingToolbarBaseActivity;
-import com.android.settingslib.collapsingtoolbar.R;
-
-public class DiracActivity extends CollapsingToolbarBaseActivity {
+public class DiracActivity extends PreferenceActivity {
 
     private static final String TAG_DIRAC = "dirac";
 
@@ -29,7 +27,7 @@ public class DiracActivity extends CollapsingToolbarBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        getFragmentManager().beginTransaction().replace(R.id.content_frame,
+        getFragmentManager().beginTransaction().replace(android.R.id.content,
                 new DiracSettingsFragment(), TAG_DIRAC).commit();
     }
 }
