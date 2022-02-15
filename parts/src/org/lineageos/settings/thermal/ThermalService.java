@@ -23,7 +23,6 @@ import android.app.IActivityTaskManager;
 import android.app.TaskStackListener;
 import android.app.Service;
 import android.content.BroadcastReceiver;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -61,15 +60,6 @@ public class ThermalService extends Service {
         mThermalUtils = new ThermalUtils(this);
         registerReceiver();
         super.onCreate();
-    }
-
-    @Override
-    public void onDestroy() {
-        if (DEBUG) Log.d(TAG, "Destroying service");
-        unregisterReceiver();
-        mThermalUtils.setDefaultThermalProfile();
-        mThermalUtils = null;
-        super.onDestroy();
     }
 
     @Override
