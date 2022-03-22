@@ -6,12 +6,10 @@
 
 $(call inherit-product, device/xiaomi/perseus/device.mk)
 
-# Inherit some common Arcana stuff.
-$(call inherit-product, vendor/aosp/common.mk)
-TARGET_SUPPORTS_BLUR := true
-TARGET_BUILD_GRAPHENEOS_CAMERA := true
-COPY_APN_SYSTEM := true
-
+# Inherit some common cipher stuff.
+$(call inherit-product, vendor/cipher/config/common_full_phone.mk)
+TARGET_INCLUDE_PIXEL_CHARGER := true
+TARGET_FACE_UNLOCK_SUPPORTED := true
 TARGET_BOOT_ANIMATION_RES := 1080
 
 # Device identifier. This must come after all inclusions.
